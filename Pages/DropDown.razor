@@ -30,17 +30,12 @@ To Code<br />
     private string Transfer_from_Code = "";
     private string Transfer_to_Code = ""; 
 
-    private DDData dddata = new DDData();
     private List<DDData> data = new();
-    //private DDData.Data 
 
     protected override async Task OnInitializedAsync()
     {
         for (int i = 0; i < 9; i++)
         {
-            dddata.No = $"{i}";
-            dddata.Transfer_from_Code = $"Transfer_From_{i}";
-            dddata.Transfer_to_Code = $"Transfer_To_{i}";
             data.Add(new DDData() { No = $"{i}", Transfer_from_Code = $"Transfer_From_{i}", Transfer_to_Code = $"Transfer_To_{i}" });   
         }
     }

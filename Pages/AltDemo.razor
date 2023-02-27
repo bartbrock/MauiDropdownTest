@@ -1,0 +1,56 @@
+﻿@page "/altdemo"
+<h3>AltDemo</h3>
+
+@code {
+    public class TestClass
+    {
+        public string TestProp { get; set; }
+    }
+
+    public List<string> Liste = new List<string>()
+    {
+      "Test 1",
+      "Test 2",
+      "Test 3",
+      "Test 4",
+      "Test 5",
+    };
+
+    public TestClass ValueFrom = new TestClass()
+        {
+            TestProp = ""
+        };
+    public TestClass ValueTo = new TestClass()
+        {
+            TestProp = ""
+        };
+
+    void HandleChangeFrom(ChangeEventArgs e)
+    {
+        ValueFrom.TestProp = e.Value.ToString();
+    }
+
+    void HandleChangeTo(ChangeEventArgs e)
+    {
+        ValueTo.TestProp = e.Value.ToString();
+    }
+
+    void Change()
+    {
+        ValueFrom.TestProp = "WhateverFrom";
+        ValueTo.TestProp = "WhateverTo";
+    }
+}
+
+<div class="p-5">
+    <button @onclick="Change">Test</button>
+    <br />
+    <input type="search" list="brow" value="@ValueFrom.TestProp" @onchange="HandleChangeFrom">
+    <input type="search" list="brow" value="@ValueTo.TestProp" @onchange="HandleChangeTo">
+    <datalist id="brow">
+        @foreach (var el in Liste)
+        {
+            <option value="@el" />
+        }
+    </datalist>
+</div>
