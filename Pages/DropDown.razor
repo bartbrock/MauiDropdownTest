@@ -1,0 +1,48 @@
+﻿@page "/dropdown"
+@using Data
+<h3>DropDown</h3>
+<br />
+From Code<br />
+@*<input type="search" class="form" list="fromlist" @bind="Transfer_from_Code" disabled=@isDisabled />*@
+<td><input type="search" list="fromlist" value="@Transfer_from_Code" disabled=@isDisabled /></td>
+<br /><br />
+To Code<br />
+@*<input type="search" list="tolist" @bind="Transfer_to_Code" disabled=@isDisabled />*@
+<td><input type="search" list="tolist" value="@Transfer_to_Code" disabled=@isDisabled /></td>
+                    
+
+<datalist class="col-4" id="fromlist">
+    @foreach (var loc in data)
+    {
+        <option value="@loc.Transfer_from_Code">@loc.No</option>
+    }
+</datalist>
+<datalist class="col-4" id="tolist">
+    @foreach (var loc in data)
+    {
+        <option value="@loc.Transfer_to_Code">@loc.No</option>
+    }
+</datalist>
+
+
+@code {
+    private bool isDisabled = false;
+    private string Transfer_from_Code = "";
+    private string Transfer_to_Code = ""; 
+
+    private DDData dddata = new DDData();
+    private List<DDData> data = new();
+    //private DDData.Data 
+
+    protected override async Task OnInitializedAsync()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            dddata.No = $"{i}";
+            dddata.Transfer_from_Code = $"Transfer_From_{i}";
+            dddata.Transfer_to_Code = $"Transfer_To_{i}";
+            data.Add(new DDData() { No = $"{i}", Transfer_from_Code = $"Transfer_From_{i}", Transfer_to_Code = $"Transfer_To_{i}" });   
+        }
+    }
+        
+}
